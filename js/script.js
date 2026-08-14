@@ -1,277 +1,388 @@
-// ==========================
-// Greeting & Clock
-// ==========================
-const greetingEl = document.getElementById('greeting');
-const dateTimeEl = document.getElementById('dateTime');
-const nameInput = document.getElementById('nameInput');
-const saveNameBtn = document.getElementById('saveNameBtn');
+'use strict';
 
-function updateGreeting() {
-  const now = new Date();
+/* ============================================================
+   DASHBOARD — script.js
+   MVP  : Greeting + clock, Focus Timer, To-Do, Quick Links
+   Extra: Dark mode, Custom name, Custom Pomodoro time,
+          Prevent duplicate tasks, Sort tasks
+   ============================================================ */
+
+/* ── helpers ─────────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+
+const store = {
+  get: (k, fallback = null) => {
+    try { const v = localStorage.getItem(k); return v !== null ? JSON.parse(v) : fallback; }
+    catch { return fallback; }
+  },
+  set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
+};
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+/* ── toast ───────────────────────────────────────────────── */
+let toastTimer;
+function toast(msg, type = 'info') {
+  const el = $('toast');
+  clearTimeout(toastTimer);
+  el.textContent  = msg;
+  el.className    = `toast${type === 'error' ? ' error' : ''}`;
+  el.style.opacity = '1';
+  toastTimer = setTimeout(() => {
+    el.style.opacity = '0';
+    setTimeout(() => el.classList.add('hidden'), 300);
+  }, 2500);
+}
+
+/* ============================================================
+   THEME  (Challenge 1 — Light / Dark mode)
+   ============================================================ */
+const themeBtn = $('themeToggle');
+let theme = store.get('theme', 'light');
+
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  themeBtn.title       = t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  store.set('theme', t);
+}
+
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* ============================================================
+   GREETING + CLOCK  (MVP)
+   ============================================================ */
+const greetingEl = $('greeting');
+const dateTimeEl = $('dateTime');
+const nameInput  = $('nameInput');
+const saveNameBtn = $('saveNameBtn');
+
+let userName = store.get('userName', '');
+nameInput.value = userName;
+
+function getGreeting(hour) {
+  if (hour <  5) return 'Good night';
+  if (hour < 12) return 'Good morning';
+  if (hour < 17) return 'Good afternoon';
+  if (hour < 21) return 'Good evening';
+  return 'Good night';
+}
+
+function updateClock() {
+  const now  = new Date();
   const hour = now.getHours();
+  const base = getGreeting(hour);
 
-  let greeting = 'Selamat Malam';
+  greetingEl.textContent = userName ? `${base}, ${userName}!` : `${base}!`;
 
-  if (hour >= 5 && hour < 12) greeting = 'Selamat Pagi';
-  else if (hour >= 12 && hour < 15) greeting = 'Selamat Siang';
-  else if (hour >= 15 && hour < 18) greeting = 'Selamat Sore';
-
-  const name = localStorage.getItem('userName') || '';
-  greetingEl.textContent = name
-    ? `${greeting}, ${name}!`
-    : `${greeting}!`;
-
-  dateTimeEl.textContent = now.toLocaleString('id-ID', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
+  dateTimeEl.textContent = now.toLocaleDateString([], {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  }) + '  ·  ' + now.toLocaleTimeString([], {
+    hour: '2-digit', minute: '2-digit', second: '2-digit'
   });
 }
 
-saveNameBtn.addEventListener('click', () => {
-  localStorage.setItem('userName', nameInput.value.trim());
-  updateGreeting();
-});
+updateClock();
+setInterval(updateClock, 1000);
 
-nameInput.value = localStorage.getItem('userName') || '';
-updateGreeting();
-setInterval(updateGreeting, 1000);
-
-// ==========================
-// Theme Toggle
-// ==========================
-const themeToggle = document.getElementById('themeToggle');
-
-function loadTheme() {
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark');
-    themeToggle.textContent = '☀️';
-  }
+/* Challenge 2 — custom name */
+function saveName() {
+  userName = nameInput.value.trim();
+  store.set('userName', userName);
+  updateClock();
+  toast(userName ? `Name saved: ${userName}` : 'Name cleared');
 }
 
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  const dark = document.body.classList.contains('dark');
+saveNameBtn.addEventListener('click', saveName);
+nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); });
 
-  localStorage.setItem('theme', dark ? 'dark' : 'light');
-  themeToggle.textContent = dark ? '☀️' : '🌙';
-});
+/* ============================================================
+   FOCUS TIMER  (MVP + Challenge 3 — custom Pomodoro time)
+   ============================================================ */
+const timerDisplay  = $('timerDisplay');
+const startBtn      = $('startBtn');
+const stopBtn       = $('stopBtn');
+const resetBtn      = $('resetBtn');
+const customMinutes = $('customMinutes');
+const setTimerBtn   = $('setTimerBtn');
 
-loadTheme();
+let timerDuration  = store.get('timerDuration', 25); // minutes
+let secondsLeft    = timerDuration * 60;
+let timerInterval  = null;
+let timerRunning   = false;
 
-// ==========================
-// Pomodoro Timer
-// ==========================
-const timerDisplay = document.getElementById('timerDisplay');
-const startBtn = document.getElementById('startBtn');
-const stopBtn = document.getElementById('stopBtn');
-const resetBtn = document.getElementById('resetBtn');
+customMinutes.value = timerDuration;
 
-let duration = 25 * 60;
-let timeLeft = duration;
-let timer = null;
+function fmt(s) {
+  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+}
 
 function renderTimer() {
-  const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-  const seconds = String(timeLeft % 60).padStart(2, '0');
-  timerDisplay.textContent = `${minutes}:${seconds}`;
+  timerDisplay.textContent = fmt(secondsLeft);
+  timerDisplay.classList.toggle('running',  timerRunning && secondsLeft > 0);
+  timerDisplay.classList.toggle('finished', secondsLeft === 0 && !timerRunning);
 }
 
-startBtn.addEventListener('click', () => {
-  if (timer) return;
-
-  timer = setInterval(() => {
-    timeLeft--;
-
-    if (timeLeft < 0) {
-      clearInterval(timer);
-      timer = null;
-      alert('Waktu fokus selesai!');
-      timeLeft = duration;
-    }
-
-    renderTimer();
-  }, 1000);
-});
-
-stopBtn.addEventListener('click', () => {
-  clearInterval(timer);
-  timer = null;
-});
-
-resetBtn.addEventListener('click', () => {
-  clearInterval(timer);
-  timer = null;
-  timeLeft = duration;
+function startTimer() {
+  if (timerRunning || secondsLeft === 0) return;
+  timerRunning = true;
   renderTimer();
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    renderTimer();
+    if (secondsLeft === 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerRunning  = false;
+      toast("⏰ Time's up! Great session!");
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (!timerRunning) return;
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning  = false;
+  renderTimer();
+}
+
+function resetTimer() {
+  stopTimer();
+  secondsLeft = timerDuration * 60;
+  renderTimer();
+}
+
+setTimerBtn.addEventListener('click', () => {
+  const val = parseInt(customMinutes.value, 10);
+  if (isNaN(val) || val < 1 || val > 120) {
+    toast('Enter a number between 1 and 120', 'error');
+    return;
+  }
+  timerDuration = val;
+  store.set('timerDuration', timerDuration);
+  resetTimer();
+  toast(`Timer set to ${val} minute${val > 1 ? 's' : ''}`);
 });
 
+startBtn.addEventListener('click', startTimer);
+stopBtn.addEventListener('click',  stopTimer);
+resetBtn.addEventListener('click', resetTimer);
 renderTimer();
 
-// ==========================
-// To-Do List
-// ==========================
-const taskInput = document.getElementById('taskInput');
-const addTaskBtn = document.getElementById('addTaskBtn');
-const taskList = document.getElementById('taskList');
+/* ============================================================
+   TO-DO LIST  (MVP + Challenge 4 — no duplicates + Challenge 5 — sort)
+   ============================================================ */
+const taskInput  = $('taskInput');
+const addTaskBtn = $('addTaskBtn');
+const taskListEl = $('taskList');
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let tasks      = store.get('tasks', []);  // [{id, text, done}]
+let filterMode = 'all';                   // 'all' | 'active' | 'done' | 'az'
 
-function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+function saveTasks()          { store.set('tasks', tasks); }
+function isDup(text, skipId)  {
+  return tasks.some(t => t.id !== skipId && t.text.toLowerCase() === text.toLowerCase());
+}
+
+function getVisible() {
+  let list = [...tasks];
+  if (filterMode === 'active') list = list.filter(t => !t.done);
+  else if (filterMode === 'done') list = list.filter(t => t.done);
+  if (filterMode === 'az') list.sort((a, b) => a.text.localeCompare(b.text));
+  return list;
 }
 
 function renderTasks() {
-  taskList.innerHTML = '';
+  taskListEl.innerHTML = '';
+  getVisible().forEach(task => {
+    const li  = document.createElement('li');
+    li.className = `task-item${task.done ? ' done' : ''}`;
 
-  tasks.forEach((task, index) => {
-    const li = document.createElement('li');
-
-    const text = document.createElement('span');
-    text.className = 'task-text' + (task.done ? ' done' : '');
-    text.textContent = task.text;
-
-    text.addEventListener('click', () => {
-      tasks[index].done = !tasks[index].done;
-      saveTasks();
-      renderTasks();
+    const cb  = document.createElement('input');
+    cb.type   = 'checkbox';
+    cb.checked = task.done;
+    cb.setAttribute('aria-label', `Mark "${task.text}" done`);
+    cb.addEventListener('change', () => {
+      const t = tasks.find(t => t.id === task.id);
+      if (t) { t.done = !t.done; saveTasks(); renderTasks(); }
     });
+
+    const span = document.createElement('span');
+    span.className   = 'task-text';
+    span.textContent = task.text;
 
     const actions = document.createElement('div');
     actions.className = 'task-actions';
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
+    editBtn.className   = 'btn-secondary';
+    editBtn.addEventListener('click', () => openModal(task.id));
 
-    editBtn.addEventListener('click', () => {
-      const newText = prompt('Edit tugas', task.text);
-
-      if (!newText) return;
-
-      const trimmed = newText.trim();
-
-      if (!trimmed) return;
-
-      const duplicate = tasks.some(
-        (t, i) => i !== index && t.text.toLowerCase() === trimmed.toLowerCase()
-      );
-
-      if (duplicate) {
-        alert('Tugas sudah ada!');
-        return;
-      }
-
-      tasks[index].text = trimmed;
+    const delBtn  = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.className   = 'btn-danger';
+    delBtn.addEventListener('click', () => {
+      tasks = tasks.filter(t => t.id !== task.id);
       saveTasks();
       renderTasks();
     });
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Hapus';
-
-    deleteBtn.addEventListener('click', () => {
-      tasks.splice(index, 1);
-      saveTasks();
-      renderTasks();
-    });
-
-    actions.append(editBtn, deleteBtn);
-    li.append(text, actions);
-    taskList.appendChild(li);
+    actions.append(editBtn, delBtn);
+    li.append(cb, span, actions);
+    taskListEl.appendChild(li);
   });
 }
 
 function addTask() {
   const text = taskInput.value.trim();
-
-  if (!text) return;
-
-  const duplicate = tasks.some(
-    task => task.text.toLowerCase() === text.toLowerCase()
-  );
-
-  if (duplicate) {
-    alert('Tugas sudah ada!');
-    return;
-  }
-
-  tasks.push({ text, done: false });
-  taskInput.value = '';
+  if (!text) { toast('Task cannot be empty', 'error'); return; }
+  if (isDup(text)) { toast('Task already exists!', 'error'); return; }
+  tasks.push({ id: uid(), text, done: false });
   saveTasks();
   renderTasks();
+  taskInput.value = '';
+  taskInput.focus();
 }
 
 addTaskBtn.addEventListener('click', addTask);
+taskInput.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
 
-taskInput.addEventListener('keypress', e => {
-  if (e.key === 'Enter') addTask();
+/* sort chips */
+document.querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterMode = btn.dataset.filter;
+    renderTasks();
+  });
 });
 
 renderTasks();
 
-// ==========================
-// Quick Links
-// ==========================
-const linkName = document.getElementById('linkName');
-const linkUrl = document.getElementById('linkUrl');
-const addLinkBtn = document.getElementById('addLinkBtn');
-const linksContainer = document.getElementById('linksContainer');
+/* ── edit modal ──────────────────────────────────────────── */
+const modalOverlay = $('modalOverlay');
+const editModal    = $('editModal');
+const editInput    = $('editInput');
+const editError    = $('editError');
+const editSaveBtn  = $('editSaveBtn');
+const editCancelBtn = $('editCancelBtn');
+let editingId = null;
 
-let links = JSON.parse(localStorage.getItem('links')) || [
-  { name: 'Google', url: 'https://google.com' },
-  { name: 'YouTube', url: 'https://youtube.com' },
-  { name: 'GitHub', url: 'https://github.com' }
+function openModal(id) {
+  const task = tasks.find(t => t.id === id);
+  if (!task) return;
+  editingId          = id;
+  editInput.value    = task.text;
+  editError.classList.add('hidden');
+  editModal.classList.remove('hidden');
+  modalOverlay.classList.remove('hidden');
+  editInput.focus();
+  editInput.select();
+}
+
+function closeModal() {
+  editModal.classList.add('hidden');
+  modalOverlay.classList.add('hidden');
+  editingId = null;
+}
+
+function saveEdit() {
+  const text = editInput.value.trim();
+  if (!text) {
+    editError.textContent = 'Task cannot be empty.';
+    editError.classList.remove('hidden');
+    return;
+  }
+  if (isDup(text, editingId)) {
+    editError.textContent = 'A task with that name already exists!';
+    editError.classList.remove('hidden');
+    return;
+  }
+  const task = tasks.find(t => t.id === editingId);
+  if (task) { task.text = text; saveTasks(); renderTasks(); }
+  closeModal();
+}
+
+editSaveBtn.addEventListener('click', saveEdit);
+editCancelBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+editInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter')  saveEdit();
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ============================================================
+   QUICK LINKS  (MVP)
+   ============================================================ */
+const linkNameInput  = $('linkName');
+const linkUrlInput   = $('linkUrl');
+const addLinkBtn     = $('addLinkBtn');
+const linksContainer = $('linksContainer');
+
+const DEFAULT_LINKS = [
+  { id: uid(), name: 'Google',  url: 'https://google.com' },
+  { id: uid(), name: 'YouTube', url: 'https://youtube.com' },
+  { id: uid(), name: 'GitHub',  url: 'https://github.com' }
 ];
 
-function saveLinks() {
-  localStorage.setItem('links', JSON.stringify(links));
-}
+let links = store.get('links', DEFAULT_LINKS);
+
+function saveLinks()  { store.set('links', links); }
 
 function renderLinks() {
   linksContainer.innerHTML = '';
+  links.forEach(link => {
+    const a   = document.createElement('a');
+    a.className  = 'link-pill';
+    a.href       = link.url;
+    a.target     = '_blank';
+    a.rel        = 'noopener noreferrer';
 
-  links.forEach((link, index) => {
-    const card = document.createElement('div');
-    card.className = 'link-card';
+    const label  = document.createElement('span');
+    label.textContent = link.name;
 
-    const a = document.createElement('a');
-    a.href = link.url;
-    a.target = '_blank';
-    a.textContent = link.name;
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '✕';
-
-    deleteBtn.addEventListener('click', () => {
-      links.splice(index, 1);
+    const del    = document.createElement('button');
+    del.className   = 'link-delete';
+    del.textContent = '✕';
+    del.title       = `Remove ${link.name}`;
+    del.setAttribute('aria-label', `Remove ${link.name}`);
+    del.addEventListener('click', e => {
+      e.preventDefault();
+      links = links.filter(l => l.id !== link.id);
       saveLinks();
       renderLinks();
     });
 
-    card.append(a, deleteBtn);
-    linksContainer.appendChild(card);
+    a.append(label, del);
+    linksContainer.appendChild(a);
   });
 }
 
 function addLink() {
-  const name = linkName.value.trim();
-  const url = linkUrl.value.trim();
+  const name   = linkNameInput.value.trim();
+  let   rawUrl = linkUrlInput.value.trim();
 
-  if (!name || !url) return;
+  if (!name)   { toast('Enter a label for the link', 'error'); return; }
+  if (!rawUrl) { toast('Enter a URL', 'error'); return; }
 
-  links.push({ name, url });
-  linkName.value = '';
-  linkUrl.value = '';
+  if (!/^https?:\/\//i.test(rawUrl)) rawUrl = 'https://' + rawUrl;
+  try { new URL(rawUrl); } catch { toast('Enter a valid URL', 'error'); return; }
 
+  links.push({ id: uid(), name, url: rawUrl });
   saveLinks();
   renderLinks();
+  linkNameInput.value = '';
+  linkUrlInput.value  = '';
+  linkNameInput.focus();
 }
 
 addLinkBtn.addEventListener('click', addLink);
+linkUrlInput.addEventListener('keydown', e => { if (e.key === 'Enter') addLink(); });
 
 renderLinks();
