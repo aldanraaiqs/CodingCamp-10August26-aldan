@@ -1,0 +1,894 @@
+/* ============================================================
+   STYLE.CSS — Persona 5-Style Portfolio
+   Single source of truth for all visual styles.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS — P5 Palette & Global Custom Properties
+   ------------------------------------------------------------ */
+:root {
+  /* P5 Palette */
+  --color-red:   #E61C1C;
+  --color-black: #0D0D0D;
+  --color-white: #FFFFFF;
+  --color-gold:  #F0C040;
+
+  /* Derived surface colours */
+  --color-surface-dark:  #141414;
+  --color-surface-light: #F5F5F5;
+  --color-text-on-dark:  var(--color-white);
+  --color-text-on-light: var(--color-black);
+
+  /* Typography */
+  --font-heading: 'Oswald', 'Anton', sans-serif;
+  --font-body:    system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing scale (rem-based) */
+  --space-xs:  0.5rem;   /*  8px */
+  --space-sm:  1rem;     /* 16px */
+  --space-md:  2rem;     /* 32px */
+  --space-lg:  4rem;     /* 64px */
+  --space-xl:  8rem;     /* 128px */
+
+  /* Animation timing */
+  --duration-fast:   200ms;
+  --duration-enter:  800ms;
+  --duration-hero:   1500ms;
+  --ease-out:        cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Z-index layers */
+  --z-nav: 100;
+}
+
+/* ------------------------------------------------------------
+   2. CSS RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%; /* 16px base */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto; /* prevent aspect-ratio distortion */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ------------------------------------------------------------
+   3. SECTIONS — common layout defaults
+   ------------------------------------------------------------ */
+main {
+  display: block;
+  width: 100%;
+}
+
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-xl) var(--space-md);
+}
+
+/* ------------------------------------------------------------
+   4. TYPOGRAPHY — headings & section heading accent
+   ------------------------------------------------------------ */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.section__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+/* Red accent bar beneath section headings */
+.section__heading::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 60%;
+  background: var(--color-red);
+  margin-top: var(--space-xs);
+}
+
+/* ------------------------------------------------------------
+   5. BUTTONS
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color            var(--duration-fast) var(--ease-out),
+    border-color     var(--duration-fast) var(--ease-out),
+    box-shadow       var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border: 2px solid var(--color-red);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: transparent;
+  color: var(--color-red);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-white);
+  border: 2px solid var(--color-gold);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--color-gold);
+  color: var(--color-black);
+}
+
+/* ------------------------------------------------------------
+   6. NAV BAR
+   ------------------------------------------------------------ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-nav);
+  background-color: var(--color-black);
+  border-bottom: 2px solid var(--color-red);
+}
+
+.nav nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  height: 3.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav__logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  color: var(--color-white);
+  text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.nav__logo:hover {
+  color: var(--color-red);
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.nav__link {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Red underline hover/active accent */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-red);
+  transition: width var(--duration-fast) var(--ease-out);
+}
+
+.nav__link:hover::after,
+.nav__link--active::after {
+  width: 100%;
+}
+
+.nav__link--active {
+  color: var(--color-red);
+}
+
+.nav__link:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 4px;
+}
+
+/* Hamburger button — hidden on desktop */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  padding: 0;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+}
+
+.nav__hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background-color: var(--color-white);
+  transition: transform var(--duration-fast) var(--ease-out),
+              opacity   var(--duration-fast) var(--ease-out);
+}
+
+/* Hamburger open state — X shape */
+.nav__hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav__hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav__hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------
+   7. SECTION DIVIDERS — diagonal clip-path
+   ------------------------------------------------------------ */
+
+/*
+ * Each section that needs a diagonal bottom edge sets --next-section-bg
+ * to match the following section's background. The shared ::after rule
+ * reads that variable so the divider triangle blends seamlessly into the
+ * next section regardless of viewport width.
+ *
+ * Section order and backgrounds:
+ *   Hero     (#0D0D0D black)  → About     (#F5F5F5 surface-light)
+ *   About    (#F5F5F5)        → Skills    (#141414 surface-dark)   [no divider needed — About handles its own bottom]
+ *   Skills   (#141414)        → Projects  (#0D0D0D black)
+ *   Projects (#0D0D0D black)  → Contact   (#141414 surface-dark)
+ */
+.section--hero {
+  --next-section-bg: var(--color-surface-light);
+}
+
+.section--skills {
+  --next-section-bg: var(--color-black);
+}
+
+.section--projects {
+  --next-section-bg: var(--color-surface-dark);
+}
+
+.section--hero::after,
+.section--skills::after,
+.section--projects::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  background: var(--next-section-bg);
+}
+
+/* ------------------------------------------------------------
+   8. HERO SECTION
+   ------------------------------------------------------------ */
+.section--hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-black);
+  padding-top: calc(3.5rem + var(--space-lg)); /* clear fixed nav */
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero__name {
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 700;
+  line-height: 0.95;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em;
+  margin-bottom: var(--space-sm);
+}
+
+.hero__word {
+  display: inline-block;
+  color: var(--color-white);
+  /* Reveal animation — fires on DOMContentLoaded; fill-mode: both keeps the
+     element hidden (opacity 0) before the delay elapses, then holds the
+     final state (opacity 1) after the animation completes. */
+  animation: heroReveal 1200ms var(--ease-out) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Hero reveal keyframes */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__role {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+  /* Reveal animation — delay comes from inline --delay custom property (300ms) */
+  animation: heroReveal 1200ms var(--ease-out) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.hero__decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Individual SVG decoration layers — each is absolutely positioned within
+   the hero__decorations container so they layer independently. */
+.hero__deco {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Diagonal slash lines — right side, vertically centered */
+.hero__deco--lines {
+  right: clamp(2rem, 8vw, 8rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(80px, 10vw, 160px);
+  height: auto;
+  opacity: 0.6;
+}
+
+/* Offset rectangles — top-right corner area */
+.hero__deco--rects {
+  right: clamp(0.5rem, 3vw, 4rem);
+  top: clamp(4rem, 12vh, 8rem);
+  width: clamp(70px, 9vw, 140px);
+  height: auto;
+  opacity: 0.7;
+}
+
+/* Diamond / rhombus shapes — bottom-right quadrant */
+.hero__deco--diamonds {
+  right: clamp(4rem, 14vw, 16rem);
+  bottom: clamp(4rem, 12vh, 8rem);
+  width: clamp(60px, 8vw, 110px);
+  height: auto;
+  opacity: 0.8;
+}
+
+/* Corner bracket accent — bottom-right corner */
+.hero__deco--bracket {
+  right: clamp(1rem, 4vw, 5rem);
+  bottom: clamp(5rem, 14vh, 10rem);
+  width: clamp(40px, 5vw, 70px);
+  height: auto;
+  opacity: 0.9;
+}
+
+/* ------------------------------------------------------------
+   9. ABOUT SECTION
+   ------------------------------------------------------------ */
+.section--about {
+  background-color: var(--color-surface-light);
+  color: var(--color-black);
+}
+
+.about__inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;         /* graceful wrap on intermediate widths */
+  gap: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Avatar wrapper — zero out figure default margin */
+.about__avatar {
+  flex-shrink: 0;
+  position: relative;
+  line-height: 0; /* collapse whitespace below inline img */
+}
+
+/* Offset geometric accent — P5 frame treatment */
+.about__avatar::after {
+  content: '';
+  position: absolute;
+  inset: 10px -10px -10px 10px; /* offset down-right */
+  border: 2px solid var(--color-red);
+  clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+  pointer-events: none;
+}
+
+.about__img {
+  /* Relative sizing: fluid up to 280px on wide viewports */
+  width: clamp(180px, 28vw, 280px);
+  height: clamp(180px, 28vw, 280px);
+  object-fit: cover;
+  clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+  display: block;
+}
+
+.about__text .section__heading {
+  color: var(--color-black);
+}
+
+.about__text .section__heading::after {
+  background: var(--color-red);
+}
+
+.about__bio {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  max-width: 55ch;
+}
+
+/* ------------------------------------------------------------
+   10. SKILLS SECTION
+   ------------------------------------------------------------ */
+.section--skills {
+  background-color: var(--color-surface-dark);
+  color: var(--color-white);
+}
+
+.skills__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.skills__category {
+  flex: 1 1 280px;
+}
+
+.skills__category-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.skills__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.skill__label {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.skill__bar {
+  position: relative;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--color-red);
+  overflow: hidden;
+}
+
+.skill__fill {
+  width: 0;
+  height: 100%;
+  background: var(--color-red);
+  transition: width var(--duration-enter) var(--ease-out);
+  position: relative;
+}
+
+/* Gold end-cap on skill fill */
+.skill__fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-gold);
+}
+
+/* Animate skill bar fill when .animate-in is applied */
+.skill.animate-in .skill__fill {
+  width: var(--target-width);
+}
+
+/* ------------------------------------------------------------
+   11. PROJECTS SECTION
+   ------------------------------------------------------------ */
+.section--projects {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-md);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.project-card {
+  background-color: var(--color-surface-dark);
+  border: 2px solid transparent;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  position: relative;
+  /* Hover transitions fire immediately (≤200ms); stagger delay applies only to entrance animation */
+  transition:
+    box-shadow    var(--duration-fast) var(--ease-out),
+    border-color  var(--duration-fast) var(--ease-out),
+    opacity       var(--duration-enter) var(--ease-out) var(--stagger, 0ms),
+    transform     var(--duration-enter) var(--ease-out) var(--stagger, 0ms);
+}
+
+/* Geometric offset outline accent */
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 6px -6px -6px 6px;
+  border: 2px solid var(--color-red);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .project-card:hover {
+    box-shadow: 6px 6px 0 var(--color-red);
+    border-color: var(--color-gold);
+  }
+}
+
+.project-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-card__desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.8);
+  flex: 1;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.project-card__tag {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  background: rgba(230, 28, 28, 0.15);
+  border: 1px solid var(--color-red);
+  color: var(--color-red);
+}
+
+/* ------------------------------------------------------------
+   12. CONTACT SECTION
+   ------------------------------------------------------------ */
+.section--contact {
+  background-color: var(--color-surface-dark);
+  color: var(--color-white);
+}
+
+.contact__form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form__label {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.form__input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--color-red);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: border-color var(--duration-fast) var(--ease-out);
+  width: 100%;
+}
+
+.form__input:focus {
+  outline: none; /* replaced by gold box-shadow ring for accessible focus indicator */
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(240, 192, 64, 0.35);
+}
+
+.form__input--textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form__error {
+  font-size: 0.8rem;
+  color: var(--color-red);
+  /* No min-height — empty text collapses the span to zero height.
+     When an error message is injected the span expands naturally. */
+}
+
+/* ------------------------------------------------------------
+   13. FOOTER
+   ------------------------------------------------------------ */
+.site-footer {
+  background-color: var(--color-black);
+  border-top: 2px solid var(--color-red);
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.site-footer__text {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ------------------------------------------------------------
+   14. ENTRANCE ANIMATIONS
+   ------------------------------------------------------------ */
+.animate-ready {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity   var(--duration-enter) var(--ease-out),
+    transform var(--duration-enter) var(--ease-out);
+  transition-delay: var(--stagger, 0ms);
+  will-change: opacity, transform;
+}
+
+.animate-ready.animate-in {
+  opacity: 1;
+  transform: none;
+  will-change: auto; /* remove GPU hint after animation */
+}
+
+/* Reduced-motion: skip all transitions and animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .skill__fill {
+    width: var(--target-width);
+    transition: none;
+  }
+
+  .hero__word,
+  .hero__role {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   15. RESPONSIVE — 768px breakpoint
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  /* Nav: show hamburger, hide links by default */
+  .nav__hamburger {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav__links {
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--color-black);
+    border-top: 2px solid var(--color-red);
+    padding: var(--space-sm) var(--space-md);
+    gap: 0;
+
+    /* Hidden by default — shown when .nav__links--open is toggled */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-fast) var(--ease-out);
+  }
+
+  .nav__links.nav__links--open {
+    max-height: 400px;
+  }
+
+  .nav__link {
+    padding: 0.75rem 0;
+    width: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  /* About: stack portrait above text */
+  .about__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Avatar accent shifts for centered layout */
+  .about__avatar::after {
+    inset: 8px -8px -8px 8px;
+  }
+
+  /* clamp() already scales the image — override only to centre it */
+  .about__img {
+    margin: 0 auto;
+  }
+
+  /* Skills: single column */
+  .skills__grid {
+    flex-direction: column;
+  }
+
+  /* Projects: single column */
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Touch targets ≥ 44×44 px */
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card__link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ------------------------------------------------------------
+   16. RESPONSIVE — 480px breakpoint
+   ------------------------------------------------------------ */
+@media (max-width: 480px) {
+  :root {
+    --space-lg: 3rem;
+    --space-xl: 5rem;
+  }
+
+  .hero__name {
+    font-size: clamp(3rem, 18vw, 5rem);
+  }
+
+  .section__heading {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+}

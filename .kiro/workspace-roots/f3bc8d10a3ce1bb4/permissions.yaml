@@ -1,0 +1,11 @@
+rules:
+  - capability: shell
+    effect: allow
+    match:
+      - New-Item *
+      - Get-Content *
+      - Select-String *
+      - Select-Object *
+      - Get-ChildItem *
+      - Where-Object *
+      - $_.FullName *

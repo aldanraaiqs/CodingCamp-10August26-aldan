@@ -1,0 +1,3 @@
+{"timestamp":"2026-08-12T12:06:04.675Z","level":"info","message":"File logging initialized at C:\\Users\\PC\\.kiro\\logs\\20260812T120604560"}
+{"timestamp":"2026-08-12T12:06:04.675Z","level":"info","message":"Initializing persistence at C:\\Users\\PC\\.kiro\\sessions"}
+{"timestamp":"2026-08-12T12:06:04.683Z","level":"info","message":"[SessionPersistence] Initialized persistence at C:\\Users\\PC\\.kiro\\sessions"}

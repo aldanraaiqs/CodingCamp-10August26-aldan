@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataModelVersion": 1,
+  "id": "sess_18a95ce0-cb5a-4b71-9dd3-fb1f2af3f40f",
+  "title": "Personal Dashboard Web App",
+  "agentMode": "vibe",
+  "workspacePaths": [
+    "c:\\Users\\PC\\OneDrive\\Documents\\kiro-experiment"
+  ],
+  "createdAt": "2026-08-12T10:33:14.993Z",
+  "lastModifiedAt": "2026-08-12T10:40:59.485Z",
+  "modelId": "auto",
+  "semanticReviewEnabled": true,
+  "ftaEnabled": false,
+  "workflowsEnabled": false,
+  "specPlanEnabled": false,
+  "specWorkflow": "quick",
+  "specSkipClarificationEnabled": true,
+  "description": "Dashboard is fully built. All MVP features and 3 challenges are implemented across index.html, css/style.css, and js/app.js.",
+  "status": "idle",
+  "_meta": {
+    "kiro": {
+      "policyPreset": [
+        "edit-workspace"
+      ],
+      "shellType": "powershell"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{"timestamp":"2026-08-12T12:06:10.745Z","level":"info","message":"File logging initialized at C:\\Users\\PC\\.kiro\\logs\\20260812T120610614"}
+{"timestamp":"2026-08-12T12:06:10.745Z","level":"info","message":"Initializing persistence at C:\\Users\\PC\\.kiro\\sessions"}
+{"timestamp":"2026-08-12T12:06:10.758Z","level":"info","message":"[SessionPersistence] Initialized persistence at C:\\Users\\PC\\.kiro\\sessions"}
+{"timestamp":"2026-08-12T12:06:10.758Z","level":"info","message":"Persistence initialized"}
+{"timestamp":"2026-08-12T12:06:10.761Z","level":"info","message":"[AgentTelemetry] Initialized {\"endpoint\":\"https://prod.us-east-1.telemetry.desktop.kiro.dev\",\"serviceName\":\"kiroAgent\"}"}
+{"timestamp":"2026-08-12T12:06:10.761Z","level":"info","message":"[KiroAgent] Remote MCP client initialized"}
+{"timestamp":"2026-08-12T12:06:10.762Z","level":"info","message":"[KiroAgent] remote-tools-discovery.create {\"client\":\"kiro-ide\"}"}
+{"timestamp":"2026-08-12T12:06:10.775Z","level":"info","message":"[KiroAgent] Cleared stale task execution statuses"}
+{"timestamp":"2026-08-12T12:06:10.775Z","level":"info","message":"[KiroAgent] Platform initialized"}
+{"timestamp":"2026-08-12T12:06:10.776Z","level":"info","message":"[KiroAgent] Resolved capabilities: {\"fsReadTextFile\":true,\"fsWriteTextFile\":true,\"kiroFsReadFile\":true,\"kiroFsWriteFile\":true,\"kiroFsStat\":true,\"kiroFsReadDirectory\":true,\"kiroFsDelete\":true,\"terminal\":true,\"secretStorage\":true,\"openExternalUrl\":true,\"knowledge\":false,\"infrastructureSafety\":true,\"c2sViews\":true,\"textSearch\":true,\"findFiles\":true}"}
+{"timestamp":"2026-08-12T12:06:10.776Z","level":"info","message":"[RemoteToolsDiscovery] Fetching available Remote tools"}
+{"timestamp":"2026-08-12T12:06:10.776Z","level":"info","message":"[KiroAgent] Client supports ACP secret storage"}
+{"timestamp":"2026-08-12T12:06:10.776Z","level":"info","message":"[KiroAgent] Client supports ACP openExternalUrl"}
+{"timestamp":"2026-08-12T12:06:10.777Z","level":"info","message":"[KiroAgent] Stored clientInfo.name {\"reportedClientName\":\"kiro-ide\",\"clientAttribution\":\"kiro-ide\",\"client\":\"kiro-ide\"}"}
+{"timestamp":"2026-08-12T12:06:10.777Z","level":"info","message":"[KiroAgent] v2 hooks cache initialized (hooks load at session start)"}
+{"timestamp":"2026-08-12T12:06:10.777Z","level":"info","message":"Handshake: returning logging config with 3 channels at C:\\Users\\PC\\.kiro\\logs\\20260812T120610614"}
+{"timestamp":"2026-08-12T12:06:10.830Z","level":"info","message":"[KiroAgent] v2 hooks loaded 0 standalone hooks from .kiro/hooks/"}
+{"timestamp":"2026-08-12T12:06:10.831Z","level":"info","message":"fs.hooksReload.ok {\"system\":\"fs\",\"durationMs\":36}"}
+{"timestamp":"2026-08-12T12:06:10.838Z","level":"info","message":"[KiroAgent] _kiro/mcp/toggle: enabled=true"}
+{"timestamp":"2026-08-12T12:06:11.797Z","level":"info","message":"[RemoteToolsDiscovery] Fetching available Remote tools"}
+{"timestamp":"2026-08-12T12:06:11.890Z","level":"info","message":"[RemoteToolsDiscovery] Discovered 5 Remote tools"}
+{"timestamp":"2026-08-12T12:06:12.024Z","level":"info","message":"[KiroAgent] ACP session/load sessionId=sess_1d212161-e748-4964-9a75-700773bde810"}
+{"timestamp":"2026-08-12T12:06:12.028Z","level":"info","message":"fs.loadSession.ok {\"system\":\"fs\",\"sessionId\":\"sess_1d212161-e748-4964-9a75-700773bde810\",\"durationMs\":2}"}
+{"timestamp":"2026-08-12T12:06:12.222Z","level":"info","message":"network.getFeatureConfiguration.ok {\"system\":\"network\",\"durationMs\":1425}"}
+{"timestamp":"2026-08-12T12:06:12.222Z","level":"info","message":"[ExperimentConfigService] Resolved {\"origin\":\"AI_EDITOR\",\"version\":\"1.0.288\",\"keyCount\":3}"}
+{"timestamp":"2026-08-12T12:06:12.222Z","level":"info","message":"cloudConfig.entitlement.decided {\"verdict\":\"granted\"}"}
+{"timestamp":"2026-08-12T12:06:12.224Z","level":"info","message":"[KiroAgent] v2 hooks loaded 0 standalone hooks from .kiro/hooks/"}
+{"timestamp":"2026-08-12T12:06:12.224Z","level":"info","message":"fs.hooksReload.ok {\"system\":\"fs\",\"durationMs\":1}"}
+{"timestamp":"2026-08-12T12:06:12.233Z","level":"info","message":"fs.loadAgentProfiles.ok {\"system\":\"fs\",\"scope\":\"user\",\"durationMs\":1}"}
+{"timestamp":"2026-08-12T12:06:12.235Z","level":"info","message":"fs.loadAgentProfiles.ok {\"system\":\"fs\",\"scope\":\"workspace\",\"durationMs\":1}"}
+{"timestamp":"2026-08-12T12:06:12.582Z","level":"info","message":"policy.session.presets_seeded {\"sessionId\":\"sess_1d212161-e748-4964-9a75-700773bde810\",\"presets\":[\"edit-workspace\"]}"}
+{"timestamp":"2026-08-12T12:06:12.585Z","level":"info","message":"[AdapterFactory] read=ACP, write=ACP, stat=ACP, readDir=ACP, delete=ACP, terminal=ACP"}
+{"timestamp":"2026-08-12T12:06:12.585Z","level":"info","message":"[WorkspaceConnection] clientTools=3, hasClientIOTools=false, injectedFs=false, injectedTerminal=false"}
+{"timestamp":"2026-08-12T12:06:12.588Z","level":"info","message":"[ActivityLogPublisher] Publishing to https://runtime.us-east-1.kiro.dev"}
+{"timestamp":"2026-08-12T12:06:12.594Z","level":"info","message":"[GovernanceService] Resolved {\"enterprise\":false,\"provider\":\"BuilderId\",\"profileArn\":\"arn:aws:codewhisperer:us-east-1:638616132270:profile/AAAACCCCXXXX\",\"controlPlaneEndpoint\":\"(none)\",\"mcpDisabled\":false,\"mcpReason\":\"admin_disabled\",\"webToolsDisabled\":false,\"autonomousAgentsDisabled\":false,\"disabledReason\":\"(none)\",\"registryUrl\":\"(none)\",\"catalogSize\":0}"}
+{"timestamp":"2026-08-12T12:06:12.602Z","level":"info","message":"[KiroAgent] _kiro/mcp/toggle: enabled=true"}
+{"timestamp":"2026-08-12T12:06:12.603Z","level":"info","message":"[KiroAgent] _kiro/mcp/toggle: enabled=true"}
+{"timestamp":"2026-08-12T12:06:12.606Z","level":"info","message":"fs.loadSession.ok {\"system\":\"fs\",\"sessionId\":\"sess_1d212161-e748-4964-9a75-700773bde810\",\"durationMs\":11}"}
+{"timestamp":"2026-08-12T12:06:12.612Z","level":"info","message":"[KiroAgent] ACP session/load complete sessionId=sess_1d212161-e748-4964-9a75-700773bde810 messages=0 at=2026-08-12T12:06:12.612Z"}
+{"timestamp":"2026-08-12T12:06:12.614Z","level":"info","message":"fs.powers.scan.ok {\"system\":\"fs\",\"baseCount\":2,\"trigger\":\"warm\",\"durationMs\":7}"}
+{"timestamp":"2026-08-12T12:06:13.153Z","level":"info","message":"[RemoteToolsDiscovery] Discovered 1 Remote tools"}
+{"timestamp":"2026-08-12T12:06:13.681Z","level":"info","message":"network.listAvailableModels.ok {\"system\":\"network\",\"durationMs\":1656}"}
+{"timestamp":"2026-08-12T12:06:13.681Z","level":"info","message":"[ACPModelConfigProvider] Loaded 9 models"}

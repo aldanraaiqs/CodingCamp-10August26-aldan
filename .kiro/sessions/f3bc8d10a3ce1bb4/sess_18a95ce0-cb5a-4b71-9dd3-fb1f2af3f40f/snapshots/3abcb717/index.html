@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal dashboard — greeting, focus timer, to-do list, quick links" />
+  <title>Dashboard</title>
+
+  <!-- Google Fonts: Oswald -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" role="banner">
+    <span class="site-header__brand">DASHBOARD</span>
+    <div class="site-header__controls">
+      <!-- Dark / Light mode toggle -->
+      <button
+        class="btn-icon"
+        id="theme-toggle"
+        aria-label="Toggle light/dark mode"
+        title="Toggle light/dark mode"
+      >
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="dashboard" role="main">
+
+    <!-- ── Greeting Card ── -->
+    <section class="card card--greeting" aria-label="Greeting">
+      <div class="greeting__body">
+        <p class="greeting__time" id="greeting-time" aria-live="polite">Good morning</p>
+        <h1 class="greeting__name" id="greeting-name">
+          <!-- Name injected by JS; fallback text for no-JS -->
+          Welcome
+        </h1>
+        <p class="greeting__date" id="greeting-date" aria-live="polite"></p>
+        <p class="greeting__clock" id="greeting-clock" aria-live="polite" aria-atomic="true"></p>
+      </div>
+
+      <!-- Custom name modal trigger -->
+      <button class="btn btn--outline btn--sm" id="open-name-modal" aria-haspopup="dialog">
+        ✏️ Set Name
+      </button>
+    </section>
+
+    <!-- ── Focus Timer Card ── -->
+    <section class="card card--timer" aria-label="Focus timer">
+      <h2 class="card__title">Focus Timer</h2>
+
+      <div class="timer__display" aria-live="polite" aria-atomic="true">
+        <span id="timer-minutes">25</span><span class="timer__colon">:</span><span id="timer-seconds">00</span>
+      </div>
+
+      <div class="timer__controls">
+        <button class="btn btn--primary" id="timer-start" aria-label="Start timer">Start</button>
+        <button class="btn btn--outline" id="timer-stop"  aria-label="Stop timer">Stop</button>
+        <button class="btn btn--outline" id="timer-reset" aria-label="Reset timer">Reset</button>
+      </div>
+
+      <!-- Custom duration -->
+      <div class="timer__custom">
+        <label class="form__label" for="timer-duration">Duration (min)</label>
+        <div class="timer__custom-row">
+          <input
+            class="form__input"
+            id="timer-duration"
+            type="number"
+            min="1"
+            max="60"
+            value="25"
+            aria-describedby="timer-duration-hint"
+          />
+          <button class="btn btn--outline btn--sm" id="timer-set" aria-label="Set custom duration">Set</button>
+        </div>
+        <span class="form__hint" id="timer-duration-hint">Enter 1–60 minutes</span>
+      </div>
+    </section>
+
+    <!-- ── To-Do List Card ── -->
+    <section class="card card--todo" aria-label="To-do list">
+      <div class="card__header">
+        <h2 class="card__title">To-Do</h2>
+        <!-- Sort toggle -->
+        <button class="btn btn--ghost btn--sm" id="todo-sort" aria-label="Sort tasks alphabetically" title="Sort A→Z">
+          ↕ Sort
+        </button>
+      </div>
+
+      <!-- Add task form -->
+      <form class="todo__form" id="todo-form" novalidate aria-label="Add a new task">
+        <input
+          class="form__input"
+          id="todo-input"
+          type="text"
+          placeholder="Add a new task…"
+          autocomplete="off"
+          aria-label="New task"
+          aria-describedby="todo-error"
+          maxlength="120"
+        />
+        <button class="btn btn--primary btn--sm" type="submit" aria-label="Add task">Add</button>
+      </form>
+      <span class="form__error" id="todo-error" role="alert" aria-live="polite"></span>
+
+      <!-- Task list -->
+      <ul class="todo__list" id="todo-list" role="list" aria-label="Tasks">
+        <!-- Tasks injected by JS -->
+      </ul>
+    </section>
+
+    <!-- ── Quick Links Card ── -->
+    <section class="card card--links" aria-label="Quick links">
+      <h2 class="card__title">Quick Links</h2>
+
+      <!-- Add link form -->
+      <form class="links__form" id="links-form" novalidate aria-label="Add a quick link">
+        <input
+          class="form__input"
+          id="links-name"
+          type="text"
+          placeholder="Label (e.g. GitHub)"
+          autocomplete="off"
+          aria-label="Link label"
+          maxlength="30"
+        />
+        <input
+          class="form__input"
+          id="links-url"
+          type="url"
+          placeholder="URL (e.g. https://github.com)"
+          autocomplete="url"
+          aria-label="Link URL"
+          maxlength="200"
+        />
+        <button class="btn btn--primary btn--sm" type="submit" aria-label="Add link">Add</button>
+      </form>
+      <span class="form__error" id="links-error" role="alert" aria-live="polite"></span>
+
+      <!-- Links grid -->
+      <div class="links__grid" id="links-grid" role="list" aria-label="Quick links">
+        <!-- Links injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Custom Name Modal ===== -->
+  <div
+    class="modal-overlay"
+    id="name-modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="name-modal-title"
+    hidden
+  >
+    <div class="modal">
+      <h2 class="modal__title" id="name-modal-title">Set Your Name</h2>
+      <form id="name-form" novalidate>
+        <div class="form__group">
+          <label class="form__label" for="name-input">Your Name</label>
+          <input
+            class="form__input"
+            id="name-input"
+            type="text"
+            placeholder="Enter your name…"
+            maxlength="40"
+            autocomplete="given-name"
+            aria-required="true"
+          />
+        </div>
+        <div class="modal__actions">
+          <button class="btn btn--primary" type="submit">Save</button>
+          <button class="btn btn--outline" type="button" id="close-name-modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Edit Task Modal ===== -->
+  <div
+    class="modal-overlay"
+    id="edit-modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="edit-modal-title"
+    hidden
+  >
+    <div class="modal">
+      <h2 class="modal__title" id="edit-modal-title">Edit Task</h2>
+      <form id="edit-form" novalidate>
+        <div class="form__group">
+          <label class="form__label" for="edit-input">Task</label>
+          <input
+            class="form__input"
+            id="edit-input"
+            type="text"
+            maxlength="120"
+            aria-required="true"
+          />
+        </div>
+        <div class="modal__actions">
+          <button class="btn btn--primary" type="submit">Save</button>
+          <button class="btn btn--outline" type="button" id="close-edit-modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

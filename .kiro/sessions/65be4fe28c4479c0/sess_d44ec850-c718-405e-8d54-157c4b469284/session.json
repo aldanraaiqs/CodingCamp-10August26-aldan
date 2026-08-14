@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataModelVersion": 1,
+  "id": "sess_d44ec850-c718-405e-8d54-157c4b469284",
+  "title": "Personal Dashboard Web App",
+  "agentMode": "vibe",
+  "workspacePaths": [
+    "c:\\Users\\PC\\OneDrive\\Documents\\GitHub\\CodingCamp-10August26-aldan"
+  ],
+  "createdAt": "2026-08-14T11:10:39.670Z",
+  "lastModifiedAt": "2026-08-14T11:48:35.188Z",
+  "modelId": "auto",
+  "semanticReviewEnabled": true,
+  "ftaEnabled": false,
+  "workflowsEnabled": false,
+  "specPlanEnabled": false,
+  "specWorkflow": "quick",
+  "specSkipClarificationEnabled": true,
+  "description": "Dashboard app fully built. All MVP features and 3 challenges implemented across index.html, css/style.css, and js/script.js.",
+  "status": "idle",
+  "_meta": {
+    "kiro": {
+      "policyPreset": [
+        "edit-workspace"
+      ],
+      "shellType": "powershell"
+    }
+  }
+}

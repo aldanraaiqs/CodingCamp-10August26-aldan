@@ -1,0 +1,263 @@
+# Implementation Plan: Persona-Style Portfolio Website
+
+## Overview
+
+Build a single-page personal portfolio website using the Vanilla Stack (HTML, CSS, JavaScript — no frameworks or build tools). Implementation follows the flat file structure defined in the design: `index.html`, `style.css`, `main.js`, and an `assets/` folder. Tasks are ordered to establish the visual shell first, then layer in interactivity and animation, and finish by wiring everything together.
+
+---
+
+## Tasks
+
+- [ ] 1. Set up project structure and design tokens
+  - Create the directory structure: `project-root/`, `assets/fonts/`, `assets/images/`
+  - Create `index.html` with the semantic HTML skeleton: `<header>`, `<main>`, `<section id="hero">`, `<section id="about">`, `<section id="skills">`, `<section id="projects">`, `<section id="contact">`, `<footer>`
+  - Create `style.css` with the `:root` CSS custom properties block for the P5 Palette (`--color-red`, `--color-black`, `--color-white`, `--color-gold`), typography tokens (`--font-heading`, `--font-body`), spacing scale, and animation timing variables
+  - Add the Google Fonts `<link>` for Oswald (or Anton) with `font-display: swap` in `index.html`
+  - Create `main.js` as an ES6 module with empty class stubs for `NavController`, `AnimationController`, and `FormValidator`
+  - _Requirements: 1.1, 1.2, 1.5, 10.4, 10.5_
+
+- [ ] 2. Implement global layout, section dividers, and base typography
+  - [ ] 2.1 Write global reset and base layout styles in `style.css`
+    - CSS reset, `box-sizing: border-box`, `scroll-behavior: smooth` on `<html>`
+    - Base `body` styles using `--color-black` background and `--color-white` text
+    - `<main>` as a full-width block; sections default to `position: relative; overflow: hidden`
+    - Use `rem`/`%`/`vw`/`vh` units throughout; no fixed-pixel widths on layout containers
+    - _Requirements: 1.1, 9.1, 9.2_
+
+  - [ ] 2.2 Implement diagonal section dividers
+    - Add `::after` pseudo-elements with `clip-path: polygon(0 100%, 100% 0, 100% 100%)` on `.section--hero`, `.section--skills`, and `.section--projects`
+    - Set `--next-section-bg` CSS variable on each section to match the following section's background color
+    - Verify dividers render correctly at 320 px, 768 px, and 1440 px viewport widths
+    - _Requirements: 1.3, 9.4_
+
+  - [ ] 2.3 Apply heading and body typography styles
+    - Apply `--font-heading` to all `h1`–`h3` elements and the nav logo; set bold/condensed weights
+    - Add `section__heading` class styles with P5 aesthetic (uppercase, letter-spacing, red accent underline or bar)
+    - _Requirements: 1.2_
+
+- [ ] 3. Implement Nav Bar
+  - [ ] 3.1 Write Nav Bar HTML markup in `index.html`
+    - Full `<header>` / `<nav>` structure with logo link, hamburger `<button>` (3 `<span>` bars), and `<ul id="nav-links">` with five `<li>` links as specified in the design
+    - Add `aria-expanded="false"`, `aria-controls="nav-links"`, and `aria-label` attributes to the hamburger button
+    - Add `data-section` attributes to each nav link
+    - _Requirements: 2.1, 2.2, 10.5_
+
+  - [ ] 3.2 Style the Nav Bar in `style.css`
+    - `position: fixed; top: 0; width: 100%; z-index: 100`
+    - Black background, white nav link text, red hover underline accent (within `--duration-fast`)
+    - `.nav__link--active` style: red accent / underline
+    - Desktop: links displayed as a flex row; hamburger hidden (`display: none`)
+    - Mobile (`≤768px`): links hidden by default; hamburger visible; `nav__links` panel slides down on open
+    - Minimum touch target `44×44 px` for hamburger and links at `≤768px`
+    - _Requirements: 2.1, 2.5, 2.6, 9.3_
+
+  - [ ] 3.3 Implement `NavController` in `main.js`
+    - `init()`: attaches `scroll` listener (throttled via `requestAnimationFrame`) and hamburger `click` listener
+    - `_getActiveSection()`: compares section `getBoundingClientRect().top` values to determine the section nearest the viewport midpoint; returns its ID
+    - On scroll: calls `_getActiveSection()`, removes `.nav__link--active` from all links, adds it to the matching `[data-section]` link
+    - `_toggleHamburger()`: toggles open class on `nav__links` panel, flips `aria-expanded` between `"true"` / `"false"`, adds Escape-key and outside-click listeners to close, traps focus inside open panel
+    - _Requirements: 2.3, 2.4, 2.5_
+
+  - [ ]* 3.4 Write property test for active nav link tracking (Property 1)
+    - **Property 1: Active nav link tracks the current section**
+    - Simulate scroll positions where each section is most visible; assert only the corresponding `.nav__link--active` is set
+    - **Validates: Requirements 2.4**
+
+- [ ] 4. Checkpoint — Nav Bar complete
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 5. Implement Hero Section
+  - [ ] 5.1 Write Hero Section HTML markup in `index.html`
+    - `<section id="hero" class="section section--hero">` with `hero__content` div containing `<h1 class="hero__name animate-ready">` with two `<span class="hero__word">` children (each with `--delay` CSS custom property), `<p class="hero__role animate-ready">`, and `<a class="hero__cta btn btn--primary" href="#projects">`
+    - Add `<div class="hero__decorations" aria-hidden="true">` for SVG geometric shapes
+    - _Requirements: 3.1, 3.3, 3.4, 10.5_
+
+  - [ ] 5.2 Style the Hero Section in `style.css`
+    - `min-height: 100vh`, black background, centered or left-aligned flex layout
+    - `@keyframes heroReveal`: `from { opacity: 0; transform: translateY(20px); }` → `to { opacity: 1; transform: none; }`
+    - `.hero__word` and `.hero__role`: use `animation: heroReveal` with `animation-delay: var(--delay)` ; total duration ≤1.5 s; triggered on `DOMContentLoaded` (add `.animate-in` or fire animation directly)
+    - `.btn--primary`: red fill, white text, sharp corners
+    - Decorative red/gold geometric shapes or diagonal lines as CSS or inline SVG
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5_
+
+- [ ] 6. Implement About Section
+  - [ ] 6.1 Write About Section HTML markup in `index.html`
+    - `<section id="about" class="section section--about">` with `about__inner animate-ready` div containing `<figure class="about__avatar">` (with `<img>` using `loading="lazy"`, explicit width/height, and descriptive `alt`) and `<div class="about__text">` with `<h2>` and `<p class="about__bio">`
+    - _Requirements: 4.1, 4.3, 10.5_
+
+  - [ ] 6.2 Style the About Section in `style.css`
+    - White or light-grey background for contrast against dark adjacent sections
+    - Profile image: `clip-path: polygon(...)` for angled P5 frame; constrain image size with relative units
+    - `about__inner` as a responsive flex/grid row (two columns on wide, single column on mobile)
+    - _Requirements: 4.1, 4.3, 4.4_
+
+- [ ] 7. Implement Skills Section
+  - [ ] 7.1 Write Skills Section HTML markup in `index.html`
+    - `<section id="skills" class="section section--skills">` with `skills__grid` containing at least two `skills__category` blocks, each with `<h3 class="skills__category-title">` and `<ul class="skills__list">` of `<li class="skill animate-ready">` items
+    - Each `<li>` contains `<span class="skill__label">`, and a `<div class="skill__bar" role="progressbar" aria-valuenow aria-valuemin aria-valuemax aria-label>` wrapping `<div class="skill__fill" style="--target-width: XX%">`
+    - _Requirements: 5.1, 5.3, 10.5_
+
+  - [ ] 7.2 Style the Skills Section in `style.css`
+    - Dark background; `skills__grid` as CSS Grid or flex with category wrapping
+    - `.skill__fill`: `width: 0; background: var(--color-red); transition: width var(--duration-enter) var(--ease-out)`
+    - `.skill.animate-in .skill__fill { width: var(--target-width); }`
+    - Gold end-cap accent on the fill bar (e.g., `::after` pseudo-element or right border in `--color-gold`)
+    - Geometric border treatment on stat bar track (sharp corners, 2px solid red/gold outline)
+    - Single-column stacking at `≤768px`
+    - _Requirements: 5.1, 5.3, 5.4, 5.5_
+
+  - [ ]* 7.3 Write property test for stat bar animation (Property 2)
+    - **Property 2: Stat bar animates to its defined proficiency width**
+    - For each `.skill` element, simulate Intersection Observer firing; assert `.skill__fill` computed width equals `--target-width` (within 1 px tolerance) after `animate-in` is applied
+    - **Validates: Requirements 5.2**
+
+- [ ] 8. Implement Projects Section
+  - [ ] 8.1 Write Projects Section HTML markup in `index.html`
+    - `<section id="projects" class="section section--projects">` with `<h2>` and `<ul class="projects__grid" role="list">` containing at least three `<li class="project-card animate-ready">` items, each with `--stagger` CSS custom property
+    - Each card: `<h3 class="project-card__title">`, `<p class="project-card__desc">` (≤30 words), `<ul class="project-card__tags" role="list">` with `<li class="project-card__tag">` children, and `<a class="project-card__link btn btn--outline" href="#" target="_blank" rel="noopener noreferrer">`
+    - _Requirements: 6.1, 6.2, 10.5_
+
+  - [ ] 8.2 Style the Projects Section in `style.css`
+    - CSS Grid: `grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))`; auto-collapses to 1 column on narrow viewports
+    - Cards: dark background, white text, 2 px geometric border in red/gold, sharp corners
+    - `.btn--outline` style for project links
+    - Hover (`.project-card:hover` under `@media (hover: hover)`): `box-shadow: 6px 6px 0 var(--color-red); border-color: var(--color-gold)` with `transition` ≤200 ms
+    - _Requirements: 6.1, 6.2, 6.4, 6.5_
+
+  - [ ]* 8.3 Write property test for project card hover (Property 4)
+    - **Property 4: Project card hover elevates within 200 ms on pointer devices**
+    - Assert that `box-shadow` and `border-color` CSS transition durations on `.project-card` are ≤200 ms
+    - **Validates: Requirements 6.4**
+
+- [ ] 9. Implement Contact Section
+  - [ ] 9.1 Write Contact Section HTML markup in `index.html`
+    - `<section id="contact" class="section section--contact">` with `<h2>` and `<form class="contact__form animate-ready" id="contact-form" novalidate>` matching the design's three `form__group` divs (name, email, message) plus submit button
+    - Each group: `<label>`, `<input>` or `<textarea>` with `aria-required="true"` and `aria-describedby` pointing to error span, and `<span class="form__error" role="alert" aria-live="polite">`
+    - _Requirements: 7.1, 10.5_
+
+  - [ ] 9.2 Style the Contact Section in `style.css`
+    - Dark background; form inputs with red/gold border, P5 Palette applied to focus states and submit button
+    - `.form__error` styled in `--color-red`; initially hidden (empty text collapses the span)
+    - Minimum touch target for submit button at `≤768px`
+    - _Requirements: 7.4, 9.3_
+
+  - [ ] 9.3 Implement `FormValidator` in `main.js`
+    - `validate(values)`: checks `name.trim()` non-empty, `email` matches `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`, `message.trim()` non-empty; returns `{ valid, errors }` per design error table
+    - `displayErrors(errors)`: uses `requestAnimationFrame` to inject error messages into `aria-live` spans within one rAF frame (≤16 ms, well within 100 ms requirement)
+    - `clearErrors()`: empties all error spans
+    - Wire `FormValidator` to `submit` event on `#contact-form` in `main.js` initialization
+    - _Requirements: 7.2, 7.3_
+
+  - [ ]* 9.4 Write property test for form validation (Property 5)
+    - **Property 5: Contact form rejects any invalid field combination**
+    - Generate representative combinations of valid/invalid (name, email, message) triples; assert `validate()` returns `valid: true` iff all three fields are valid, and `valid: false` with the correct error key(s) otherwise
+    - **Validates: Requirements 7.2**
+
+  - [ ]* 9.5 Write property test for inline error timing (Property 6)
+    - **Property 6: Inline validation errors appear within 100 ms of a failed submission attempt**
+    - Simulate a form submit with invalid fields; assert that `aria-live` spans are updated within 100 ms of the `submit` event
+    - **Validates: Requirements 7.3**
+
+- [ ] 10. Checkpoint — All sections complete
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 11. Implement `AnimationController` and wire scroll-triggered entrance animations
+  - [ ] 11.1 Implement `AnimationController` in `main.js`
+    - Constructor accepts a CSS selector and `IntersectionObserverInit` options
+    - `init()`: queries all matching elements, creates one `IntersectionObserver` with threshold `0.15`–`0.20`, observes all elements
+    - `_onIntersect(entries, observer)`: for each intersecting entry, adds `.animate-in` to `entry.target`, then calls `observer.unobserve(entry.target)`
+    - Feature-detection guard: if `IntersectionObserver` is not in `window`, add `.animate-in` to all `.animate-ready` elements immediately
+    - Wire `AnimationController` to observe `.animate-ready` elements inside `DOMContentLoaded` in `main.js`
+    - _Requirements: 8.1, 8.2, 8.3_
+
+  - [ ] 11.2 Add `prefers-reduced-motion` CSS rules
+    - Add `@media (prefers-reduced-motion: reduce)` block in `style.css`: set `.animate-ready` to `opacity: 1; transform: none; transition: none` and `.skill__fill` to `width: var(--target-width); transition: none`
+    - _Requirements: 8.5_
+
+  - [ ]* 11.3 Write property test for animation idempotency (Property 7)
+    - **Property 7: Entrance animations are idempotent — no element re-animates**
+    - Simulate `IntersectionObserver` firing twice for the same element; assert `.animate-in` is added only once and `unobserve` is called after the first intersection
+    - **Validates: Requirements 8.3**
+
+  - [ ]* 11.4 Write property test for project card entrance animation (Property 3)
+    - **Property 3: Project card entrance animation triggers exactly once per card**
+    - For each `.project-card`, simulate viewport entry twice; assert `.animate-in` class exists and no animation reset occurred on the second pass
+    - **Validates: Requirements 6.3, 8.3**
+
+  - [ ]* 11.5 Write property test for reduced-motion suppression (Property 8)
+    - **Property 8: All animations are suppressed when prefers-reduced-motion is active**
+    - With `prefers-reduced-motion: reduce` active, assert all `.animate-ready` elements have `opacity: 1`, `transform: none`, and `transition: none`; assert all `.skill__fill` elements have their full `--target-width` applied
+    - **Validates: Requirements 8.5**
+
+- [ ] 12. Implement Hero Section entrance animation wiring
+  - [ ] 12.1 Wire Hero name/role reveal animation on `DOMContentLoaded`
+    - In `main.js` `DOMContentLoaded` handler: add `.animate-in` to `.hero__word` and `.hero__role` elements (or rely on CSS `animation-play-state`) so the keyframe reveal fires automatically on load
+    - Confirm total stagger + duration completes within 1.5 s
+    - _Requirements: 3.2_
+
+- [ ] 13. Responsiveness and mobile polish
+  - [ ] 13.1 Add responsive breakpoint rules in `style.css`
+    - `@media (max-width: 768px)`: single-column skills grid, single-column projects grid, hamburger nav active, `about__inner` stacks vertically, touch targets `≥44×44 px` for all interactive elements
+    - `@media (max-width: 480px)`: further scale down heading font sizes and spacing using relative units
+    - Verify no horizontal overflow at 320 px, 375 px, 768 px, 1024 px, and 1440 px
+    - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+
+  - [ ]* 13.2 Write property test for no horizontal overflow (Property 9)
+    - **Property 9: No horizontal overflow across the supported viewport range**
+    - At viewport widths 320, 480, 768, 1024, 1440, and 2560 px, assert `document.body.scrollWidth === document.body.clientWidth`
+    - **Validates: Requirements 9.1**
+
+  - [ ]* 13.3 Write property test for touch target sizes (Property 10)
+    - **Property 10: All interactive elements meet minimum touch target size on narrow viewports**
+    - At viewport width ≤768 px, use `getBoundingClientRect()` on each nav link, button, and project card link; assert width ≥44 px and height ≥44 px
+    - **Validates: Requirements 9.3**
+
+- [ ] 14. Performance and accessibility hardening
+  - [ ] 14.1 Audit and apply performance optimizations in `index.html` and `style.css`
+    - Add `will-change: transform, opacity` only to `.animate-ready` elements during animation (remove after `.animate-in` is applied via JS)
+    - Verify `font-display: swap` is present in any `@font-face` declarations
+    - Add `loading="lazy"` and explicit `width`/`height` on all `<img>` elements below the fold
+    - Confirm total JS payload estimate is under 50 KB uncompressed
+    - _Requirements: 10.1, 10.2, 10.3, 10.4_
+
+  - [ ] 14.2 Audit semantic HTML and ARIA in `index.html`
+    - Confirm use of `<header>`, `<main>`, `<section>`, `<nav>`, `<footer>`, `<article>` as appropriate
+    - Confirm all interactive elements have `aria-label` or visible label text
+    - Confirm `role="progressbar"` with `aria-valuenow`/`aria-valuemin`/`aria-valuemax` on all stat bars
+    - Confirm `role="list"` on `<ul>` elements where list semantics are meaningful
+    - _Requirements: 10.5_
+
+- [ ] 15. Final checkpoint — All tests pass, full integration verified
+  - Ensure all tests pass, ask the user if questions arise.
+
+---
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for a faster MVP
+- Each task references specific requirements for traceability
+- The design document contains full HTML/CSS/JS snippets — treat them as reference implementations, not mandates
+- Property tests (Properties 1–10) validate universal correctness guarantees defined in `design.md`
+- Unit tests validate specific examples and edge cases
+- Checkpoints at tasks 4, 10, and 15 ensure incremental validation at meaningful milestones
+- The `--stagger` CSS custom property on project cards drives the 100 ms-per-card entrance animation offset without any JS loop
+- All animation durations must stay within 400 ms–900 ms (entrance) and ≤200 ms (hover) as required
+
+---
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    { "id": 0, "tasks": ["1"] },
+    { "id": 1, "tasks": ["2.1", "2.2", "2.3"] },
+    { "id": 2, "tasks": ["3.1", "5.1", "6.1", "7.1", "8.1", "9.1"] },
+    { "id": 3, "tasks": ["3.2", "5.2", "6.2", "7.2", "8.2", "9.2", "9.3"] },
+    { "id": 4, "tasks": ["3.3", "7.3", "8.3", "9.4", "9.5"] },
+    { "id": 5, "tasks": ["3.4", "11.1", "12.1"] },
+    { "id": 6, "tasks": ["11.2", "11.3", "11.4", "11.5", "13.1"] },
+    { "id": 7, "tasks": ["13.2", "13.3", "14.1", "14.2"] }
+  ]
+}
+```

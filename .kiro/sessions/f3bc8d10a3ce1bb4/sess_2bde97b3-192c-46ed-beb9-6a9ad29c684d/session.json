@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "dataModelVersion": 1,
+  "id": "sess_2bde97b3-192c-46ed-beb9-6a9ad29c684d",
+  "title": "Build Personal Dashboard App",
+  "agentMode": "vibe",
+  "workspacePaths": [
+    "c:\\Users\\PC\\OneDrive\\Documents\\kiro-experiment"
+  ],
+  "createdAt": "2026-08-12T10:54:57.468Z",
+  "lastModifiedAt": "2026-08-12T10:57:16.582Z",
+  "modelId": "auto",
+  "semanticReviewEnabled": true,
+  "ftaEnabled": false,
+  "workflowsEnabled": false,
+  "specPlanEnabled": false,
+  "specWorkflow": "quick",
+  "specSkipClarificationEnabled": true,
+  "description": "Verifying the completed dashboard against all requirements and constraints before marking the task done.",
+  "status": "failed",
+  "_meta": {
+    "kiro": {
+      "policyPreset": [
+        "edit-workspace"
+      ],
+      "shellType": "powershell"
+    }
+  }
+}

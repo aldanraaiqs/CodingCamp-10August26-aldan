@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "sess_2b27bf41-3d57-4dca-bc80-46100cfd627c",
+  "title": "New Session",
+  "agentMode": "vibe",
+  "workspacePaths": [
+    "c:\\Users\\PC\\OneDrive\\Documents\\kiro-experiment"
+  ],
+  "createdAt": "2026-08-12T11:44:41.349Z",
+  "lastModifiedAt": "2026-08-12T11:44:41.351Z",
+  "semanticReviewEnabled": true,
+  "ftaEnabled": false,
+  "workflowsEnabled": false,
+  "specPlanEnabled": false,
+  "specWorkflow": "quick",
+  "specSkipClarificationEnabled": true,
+  "_meta": {
+    "kiro": {
+      "policyPreset": [
+        "edit-workspace"
+      ],
+      "shellType": "powershell"
+    }
+  },
+  "dataModelVersion": 1
+}

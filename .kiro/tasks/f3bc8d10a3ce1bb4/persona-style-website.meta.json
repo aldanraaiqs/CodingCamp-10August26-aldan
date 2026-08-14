@@ -1,0 +1,442 @@
+{
+  "tasks": {
+    "1. Set up project structure and design tokens": {
+      "taskId": "1. Set up project structure and design tokens",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786367748258
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367970688
+    },
+    "2. Implement global layout, section dividers, and base typography": {
+      "taskId": "2. Implement global layout, section dividers, and base typography",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "2.1 Write global reset and base layout styles in `style.css`": {
+      "taskId": "2.1 Write global reset and base layout styles in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786367975116
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368101290
+    },
+    "2.2 Implement diagonal section dividers": {
+      "taskId": "2.2 Implement diagonal section dividers",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786367975555
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368102034
+    },
+    "2.3 Apply heading and body typography styles": {
+      "taskId": "2.3 Apply heading and body typography styles",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786367976304
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368102912
+    },
+    "3. Implement Nav Bar": {
+      "taskId": "3. Implement Nav Bar",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "3.1 Write Nav Bar HTML markup in `index.html`": {
+      "taskId": "3.1 Write Nav Bar HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368107861
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368208757
+    },
+    "3.2 Style the Nav Bar in `style.css`": {
+      "taskId": "3.2 Style the Nav Bar in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368217472
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786369075552
+    },
+    "3.3 Implement `NavController` in `main.js`": {
+      "taskId": "3.3 Implement `NavController` in `main.js`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "3.4 Write property test for active nav link tracking (Property 1)": {
+      "taskId": "3.4 Write property test for active nav link tracking (Property 1)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "4. Checkpoint — Nav Bar complete": {
+      "taskId": "4. Checkpoint — Nav Bar complete",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "5. Implement Hero Section": {
+      "taskId": "5. Implement Hero Section",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "5.1 Write Hero Section HTML markup in `index.html`": {
+      "taskId": "5.1 Write Hero Section HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368108385
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368209496
+    },
+    "5.2 Style the Hero Section in `style.css`": {
+      "taskId": "5.2 Style the Hero Section in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368218191
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786369078024
+    },
+    "6. Implement About Section": {
+      "taskId": "6. Implement About Section",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "6.1 Write About Section HTML markup in `index.html`": {
+      "taskId": "6.1 Write About Section HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368109089
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368210289
+    },
+    "6.2 Style the About Section in `style.css`": {
+      "taskId": "6.2 Style the About Section in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368218919
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786369074918
+    },
+    "7. Implement Skills Section": {
+      "taskId": "7. Implement Skills Section",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "7.1 Write Skills Section HTML markup in `index.html`": {
+      "taskId": "7.1 Write Skills Section HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368109863
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368211011
+    },
+    "7.2 Style the Skills Section in `style.css`": {
+      "taskId": "7.2 Style the Skills Section in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368219597
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786369077153
+    },
+    "7.3 Write property test for stat bar animation (Property 2)": {
+      "taskId": "7.3 Write property test for stat bar animation (Property 2)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "8. Implement Projects Section": {
+      "taskId": "8. Implement Projects Section",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "8.1 Write Projects Section HTML markup in `index.html`": {
+      "taskId": "8.1 Write Projects Section HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368111617
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368212353
+    },
+    "8.2 Style the Projects Section in `style.css`": {
+      "taskId": "8.2 Style the Projects Section in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368220366
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786369076383
+    },
+    "8.3 Write property test for project card hover (Property 4)": {
+      "taskId": "8.3 Write property test for project card hover (Property 4)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "9. Implement Contact Section": {
+      "taskId": "9. Implement Contact Section",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "9.1 Write Contact Section HTML markup in `index.html`": {
+      "taskId": "9.1 Write Contact Section HTML markup in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786368111820
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786368212476
+    },
+    "9.2 Style the Contact Section in `style.css`": {
+      "taskId": "9.2 Style the Contact Section in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786369082202
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786529795773
+    },
+    "9.3 Implement `FormValidator` in `main.js`": {
+      "taskId": "9.3 Implement `FormValidator` in `main.js`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [
+        {
+          "executionId": "18bd2f07-e4c2-4f5d-aac3-fe1ac3e01727",
+          "chatSessionId": "sess_74b1fa59-2d0f-4316-84bd-02a596b4a2b6",
+          "timestamp": 1786369082998
+        }
+      ],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786529795773
+    },
+    "9.4 Write property test for form validation (Property 5)": {
+      "taskId": "9.4 Write property test for form validation (Property 5)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "9.5 Write property test for inline error timing (Property 6)": {
+      "taskId": "9.5 Write property test for inline error timing (Property 6)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "10. Checkpoint — All sections complete": {
+      "taskId": "10. Checkpoint — All sections complete",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11. Implement `AnimationController` and wire scroll-triggered entrance animations": {
+      "taskId": "11. Implement `AnimationController` and wire scroll-triggered entrance animations",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11.1 Implement `AnimationController` in `main.js`": {
+      "taskId": "11.1 Implement `AnimationController` in `main.js`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11.2 Add `prefers-reduced-motion` CSS rules": {
+      "taskId": "11.2 Add `prefers-reduced-motion` CSS rules",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11.3 Write property test for animation idempotency (Property 7)": {
+      "taskId": "11.3 Write property test for animation idempotency (Property 7)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11.4 Write property test for project card entrance animation (Property 3)": {
+      "taskId": "11.4 Write property test for project card entrance animation (Property 3)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "11.5 Write property test for reduced-motion suppression (Property 8)": {
+      "taskId": "11.5 Write property test for reduced-motion suppression (Property 8)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "12. Implement Hero Section entrance animation wiring": {
+      "taskId": "12. Implement Hero Section entrance animation wiring",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "12.1 Wire Hero name/role reveal animation on `DOMContentLoaded`": {
+      "taskId": "12.1 Wire Hero name/role reveal animation on `DOMContentLoaded`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "13. Responsiveness and mobile polish": {
+      "taskId": "13. Responsiveness and mobile polish",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "13.1 Add responsive breakpoint rules in `style.css`": {
+      "taskId": "13.1 Add responsive breakpoint rules in `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "13.2 Write property test for no horizontal overflow (Property 9)": {
+      "taskId": "13.2 Write property test for no horizontal overflow (Property 9)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "13.3 Write property test for touch target sizes (Property 10)": {
+      "taskId": "13.3 Write property test for touch target sizes (Property 10)",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "14. Performance and accessibility hardening": {
+      "taskId": "14. Performance and accessibility hardening",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "14.1 Audit and apply performance optimizations in `index.html` and `style.css`": {
+      "taskId": "14.1 Audit and apply performance optimizations in `index.html` and `style.css`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "14.2 Audit semantic HTML and ARIA in `index.html`": {
+      "taskId": "14.2 Audit semantic HTML and ARIA in `index.html`",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    },
+    "15. Final checkpoint — All tests pass, full integration verified": {
+      "taskId": "15. Final checkpoint — All tests pass, full integration verified",
+      "specUri": "file:///c:/Users/PC/OneDrive/Documents/kiro-experiment/.kiro/specs/persona-style-website/tasks.md",
+      "executionHistory": [],
+      "createdAt": 1786367737990,
+      "updatedAt": 1786367737990
+    }
+  }
+}

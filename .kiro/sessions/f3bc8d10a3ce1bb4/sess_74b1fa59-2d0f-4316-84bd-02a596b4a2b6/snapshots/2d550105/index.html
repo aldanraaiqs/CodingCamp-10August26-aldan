@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio — Developer / Designer">
+  <title>Portfolio</title>
+
+  <!-- Google Fonts: Oswald (bold condensed heading font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Nav Bar ===== -->
+  <header class="nav" role="banner">
+    <nav aria-label="Main navigation">
+      <a class="nav__logo" href="#hero">PORTFOLIO</a>
+      <button
+        class="nav__hamburger"
+        aria-expanded="false"
+        aria-controls="nav-links"
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-links" class="nav__links" role="list">
+        <li><a class="nav__link" href="#hero"     data-section="hero">Hero</a></li>
+        <li><a class="nav__link" href="#about"    data-section="about">About</a></li>
+        <li><a class="nav__link" href="#skills"   data-section="skills">Skills</a></li>
+        <li><a class="nav__link" href="#projects" data-section="projects">Projects</a></li>
+        <li><a class="nav__link" href="#contact"  data-section="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== Main Content ===== -->
+  <main>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section section--hero" aria-label="Hero">
+      <div class="hero__content">
+        <h1 class="hero__name animate-ready">
+          <span class="hero__word" style="--delay: 0ms">JOHN</span>
+          <span class="hero__word" style="--delay: 150ms">DOE</span>
+        </h1>
+        <p class="hero__role animate-ready" style="--delay: 300ms">Developer / Designer</p>
+        <a
+          class="hero__cta btn btn--primary"
+          href="#projects"
+          aria-label="View my projects"
+        >View Projects</a>
+      </div>
+      <div class="hero__decorations" aria-hidden="true">
+        <!-- Diagonal slash lines (red) -->
+        <svg class="hero__deco hero__deco--lines" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <line x1="0"   y1="80"  x2="200" y2="0"   stroke="#E61C1C" stroke-width="3"/>
+          <line x1="0"   y1="160" x2="200" y2="80"  stroke="#E61C1C" stroke-width="3"/>
+          <line x1="0"   y1="240" x2="200" y2="160" stroke="#E61C1C" stroke-width="2" stroke-dasharray="12 6"/>
+          <line x1="0"   y1="320" x2="200" y2="240" stroke="#E61C1C" stroke-width="2" stroke-dasharray="12 6"/>
+        </svg>
+
+        <!-- Geometric rectangles (red, gold, outlined) -->
+        <svg class="hero__deco hero__deco--rects" viewBox="0 0 160 300" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <rect x="4"   y="4"   width="80" height="80" fill="none"     stroke="#E61C1C" stroke-width="3"/>
+          <rect x="18"  y="18"  width="80" height="80" fill="#E61C1C"  stroke="none"    opacity="0.15"/>
+          <rect x="60"  y="140" width="90" height="50" fill="none"     stroke="#F0C040" stroke-width="2"/>
+          <rect x="68"  y="148" width="90" height="50" fill="#F0C040"  stroke="none"    opacity="0.12"/>
+        </svg>
+
+        <!-- Diamond / rhombus shapes (gold) -->
+        <svg class="hero__deco hero__deco--diamonds" viewBox="0 0 120 260" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <!-- Large diamond outline -->
+          <polygon points="60,10 110,70 60,130 10,70" fill="none" stroke="#F0C040" stroke-width="3"/>
+          <!-- Small filled diamond -->
+          <polygon points="60,148 80,178 60,208 40,178" fill="#F0C040" opacity="0.8"/>
+          <!-- Tiny accent diamond -->
+          <polygon points="95,220 108,240 95,260 82,240" fill="none" stroke="#E61C1C" stroke-width="2"/>
+        </svg>
+
+        <!-- Corner bracket accent (gold) -->
+        <svg class="hero__deco hero__deco--bracket" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <polyline points="0,40 0,0 40,0"   fill="none" stroke="#F0C040" stroke-width="4" stroke-linecap="square"/>
+          <polyline points="40,80 80,80 80,40" fill="none" stroke="#E61C1C" stroke-width="4" stroke-linecap="square"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section--about" aria-label="About me">
+      <div class="about__inner animate-ready">
+        <figure class="about__avatar" aria-hidden="true">
+          <img
+            src="assets/images/profile.jpg"
+            alt="Portrait of John Doe"
+            class="about__img"
+            width="280"
+            height="280"
+            loading="lazy"
+          >
+        </figure>
+        <div class="about__text">
+          <h2 class="section__heading">About</h2>
+          <p class="about__bio">
+            Hi, I'm John — a developer and designer passionate about crafting
+            clean, accessible, and visually striking web experiences. When I'm
+            not writing code I'm exploring game design, typography, and
+            generative art.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section--skills" aria-label="Skills">
+      <h2 class="section__heading">Skills</h2>
+      <div class="skills__grid">
+
+        <div class="skills__category">
+          <h3 class="skills__category-title">Languages</h3>
+          <ul class="skills__list" role="list">
+            <li class="skill animate-ready">
+              <span class="skill__label">JavaScript</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="90"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="JavaScript proficiency: 90%"
+              >
+                <div class="skill__fill" style="--target-width: 90%"></div>
+              </div>
+            </li>
+            <li class="skill animate-ready">
+              <span class="skill__label">TypeScript</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="80"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="TypeScript proficiency: 80%"
+              >
+                <div class="skill__fill" style="--target-width: 80%"></div>
+              </div>
+            </li>
+            <li class="skill animate-ready">
+              <span class="skill__label">CSS</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="85"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="CSS proficiency: 85%"
+              >
+                <div class="skill__fill" style="--target-width: 85%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skills__category">
+          <h3 class="skills__category-title">Tools</h3>
+          <ul class="skills__list" role="list">
+            <li class="skill animate-ready">
+              <span class="skill__label">Git</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="88"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="Git proficiency: 88%"
+              >
+                <div class="skill__fill" style="--target-width: 88%"></div>
+              </div>
+            </li>
+            <li class="skill animate-ready">
+              <span class="skill__label">VS Code</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="92"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="VS Code proficiency: 92%"
+              >
+                <div class="skill__fill" style="--target-width: 92%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skills__category">
+          <h3 class="skills__category-title">Design</h3>
+          <ul class="skills__list" role="list">
+            <li class="skill animate-ready">
+              <span class="skill__label">Figma</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="Figma proficiency: 75%"
+              >
+                <div class="skill__fill" style="--target-width: 75%"></div>
+              </div>
+            </li>
+            <li class="skill animate-ready">
+              <span class="skill__label">Inkscape</span>
+              <div
+                class="skill__bar"
+                role="progressbar"
+                aria-valuenow="60"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-label="Inkscape proficiency: 60%"
+              >
+                <div class="skill__fill" style="--target-width: 60%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section section--projects" aria-label="Projects">
+      <h2 class="section__heading">Projects</h2>
+      <ul class="projects__grid" role="list">
+
+        <li class="project-card animate-ready" style="--stagger: 0ms">
+          <h3 class="project-card__title">Project Alpha</h3>
+          <p class="project-card__desc">A full-stack web app for real-time collaboration built with modern browser APIs.</p>
+          <ul class="project-card__tags" role="list" aria-label="Technologies used">
+            <li class="project-card__tag">JavaScript</li>
+            <li class="project-card__tag">WebSockets</li>
+            <li class="project-card__tag">Node.js</li>
+          </ul>
+          <a
+            class="project-card__link btn btn--outline"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Project Alpha on GitHub"
+          >View Source</a>
+        </li>
+
+        <li class="project-card animate-ready" style="--stagger: 100ms">
+          <h3 class="project-card__title">Project Beta</h3>
+          <p class="project-card__desc">An accessible design system of reusable CSS components with zero JavaScript dependencies.</p>
+          <ul class="project-card__tags" role="list" aria-label="Technologies used">
+            <li class="project-card__tag">CSS</li>
+            <li class="project-card__tag">HTML</li>
+          </ul>
+          <a
+            class="project-card__link btn btn--outline"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Project Beta on GitHub"
+          >View Source</a>
+        </li>
+
+        <li class="project-card animate-ready" style="--stagger: 200ms">
+          <h3 class="project-card__title">Project Gamma</h3>
+          <p class="project-card__desc">A generative art tool that renders procedural geometry using the Canvas API.</p>
+          <ul class="project-card__tags" role="list" aria-label="Technologies used">
+            <li class="project-card__tag">TypeScript</li>
+            <li class="project-card__tag">Canvas API</li>
+          </ul>
+          <a
+            class="project-card__link btn btn--outline"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Project Gamma on GitHub"
+          >View Source</a>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section section--contact" aria-label="Contact">
+      <h2 class="section__heading">Contact</h2>
+      <form
+        class="contact__form animate-ready"
+        id="contact-form"
+        novalidate
+        aria-label="Contact form"
+      >
+        <div class="form__group">
+          <label class="form__label" for="contact-name">Name</label>
+          <input
+            class="form__input"
+            id="contact-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            aria-required="true"
+            aria-describedby="contact-name-error"
+          >
+          <span
+            class="form__error"
+            id="contact-name-error"
+            role="alert"
+            aria-live="polite"
+          ></span>
+        </div>
+
+        <div class="form__group">
+          <label class="form__label" for="contact-email">Email</label>
+          <input
+            class="form__input"
+            id="contact-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            aria-required="true"
+            aria-describedby="contact-email-error"
+          >
+          <span
+            class="form__error"
+            id="contact-email-error"
+            role="alert"
+            aria-live="polite"
+          ></span>
+        </div>
+
+        <div class="form__group">
+          <label class="form__label" for="contact-message">Message</label>
+          <textarea
+            class="form__input form__input--textarea"
+            id="contact-message"
+            name="message"
+            rows="5"
+            aria-required="true"
+            aria-describedby="contact-message-error"
+          ></textarea>
+          <span
+            class="form__error"
+            id="contact-message-error"
+            role="alert"
+            aria-live="polite"
+          ></span>
+        </div>
+
+        <button class="btn btn--primary" type="submit">Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <p class="site-footer__text">&copy; 2024 John Doe. Built with the Vanilla Stack.</p>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
